@@ -6,4 +6,5 @@ public interface IAttraction
 	void setAddress(int street, int ave);
 	void setName(String name);
 	boolean lessThan(IAttraction other);
+	boolean accept(ISelect selecter);
 }

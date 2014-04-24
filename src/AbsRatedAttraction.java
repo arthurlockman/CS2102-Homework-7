@@ -34,4 +34,10 @@ public abstract class AbsRatedAttraction extends AbsAttraction implements IRated
 
 		return result;
 	}
+
+	@Override
+	public boolean accept(ISelect selecter)
+	{
+		return selecter.choose(this);
+	}
 }

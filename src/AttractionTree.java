@@ -12,6 +12,13 @@ public class AttractionTree implements IAttractionTree
 		this.right = right;
 	}
 
+	AttractionTree(IAttraction data)
+	{
+		this.data = data;
+		this.left = new MtTree();
+		this.right = new MtTree();
+	}
+
 	@Override
 	public IAttraction getData()
 	{
@@ -50,18 +57,22 @@ public class AttractionTree implements IAttractionTree
 	@Override
 	public boolean containsAny(ISelect s)
 	{
-		return false;
+		return this.data.accept(s) || this.left.containsAny(s) || this.right.containsAny(s);
 	}
 
 	@Override
 	public boolean allAre(ISelect s)
 	{
-		return false;
+		return this.data.accept(s) && this.left.containsAny(s) && this.right.containsAny(s);
 	}
 
 	@Override
 	public LinkedList<AbsAttraction> filter(ISelect s)
 	{
-		return null;
+		LinkedList<AbsAttraction> l = new LinkedList<AbsAttraction>();
+		if (this.data.accept(s)) { l.add((AbsAttraction)this.data); }
+		l.addAll(this.left.filter(s));
+		l.addAll(this.right.filter(s));
+		return l;
 	}
 }

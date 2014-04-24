@@ -47,6 +47,12 @@ public abstract class AbsAttraction implements IAttraction
 	}
 
 	@Override
+	public boolean accept(ISelect selecter)
+	{
+		return selecter.choose(this);
+	}
+
+	@Override
 	public int hashCode()
 	{
 		int result = 43;
